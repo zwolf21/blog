@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}register.html{% endblock title %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/form.css" %}{% endblock extrastyle %}
+
+
+
+{% block content %}
+<div id="content">
+	<div class="container">
+		<h1>신규 가입</h1>
+		<form class="col-sm-4" role="form" action="." method="post">
+		{% csrf_token %}
+		{% if form.errors %}
+		<p class="errornote">Wrong! Please correct the errors(s) bllow</p>
+		{% endif %}
+
+		<p>이름과 비번을 입력 하시오</p>
+		<div class="form-group">
+			<label for="id_username">이름:</label>
+			<input class="form-control" autofocus="" id="id_username" maxlength="150" name="username" type="text" required />			
+		</div>
+		<div class="form-group">
+			<label for="id_password1">비번:</label>
+			<input class="form-control" id="id_password1" name="password1" type="password" required />			
+		</div><div class="form-group">
+			<label for="id_password2">비번확인:</label>
+			<input class="form-control" id="id_password2" name="password2" type="password" required />			
+		</div>
+		<input class="btn btn-primary" type="submit" value="가입">
+
+		<script type="text/javascript">
+		document.getElementById('id_username').focus();
+		</script>
+		</form>
+	</div>
+</div>
+{% endblock content %}

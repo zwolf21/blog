@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+	home.html
+{% endblock title %}
+{% load staticfiles %}
+{# {% block extrastyle %}{% static "css/home.css" %}{% endblock extrastyle %} #}
+
+{% block content %}
+	<div id="content_home" class="container-fluid">
+		<div id="homeimg" class="row-fluid">
+			<a href="/"><img class="img-polaroid" src="{% static 'img/home.jpg' %}" ></a>
+			<h4 style="margin: 0;">류용한 싸이트</h4>
+		</div>
+		<hr style="margin: 5px 0;">
+		<h2>Select App</h2>
+
+		<table id="applist">
+			<tr>
+				<td><b><i><a href="{% url 'bookmark:index' %}">BookMark</a></i></b></td>
+				<td>You can write your own post and share to others</td>
+				{# <td class="Edit"><i><a href="{% url 'bookmark:add' %}">Add</a></i></td> #}
+				{# <td class="Edit"><i><a href="{% url 'bookmark:change' %}">Change</a></i></td> #}
+			</tr>
+			<tr>
+				<td><b><i><a href="{% url 'blog:index' %}">Blog</a></i></b></td>
+				<td>You can write your own post and share to others</td>
+				<td class="Edit"><i><a href="{% url 'blog:add' %}">Add</a></i></td>
+			</tr>
+			
+		</table>
+	</div>
+{% endblock content %}
+
+{% block footer %}
+	<div id="footer">
+		&copy; mhs 2016
+	</div>
+{% endblock footer %}
+
+
+
+
+

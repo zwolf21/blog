@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}post-detail{% endblock %}
+
+{% block content %}
+<div id="content">
+<h2>제목:{{ object.title }}</h2>
+
+
+
+<p class="date">올린 날짜:{{ object.create_date|date:"Y-m-d" }}</p>
+<p>작성자: {{ object.user.username }}</p>
+<br>
+<div class="body">
+	{# <p><i class="icon-file"></i><a href="{{ object.file.url }}">{{ object.get_file_name }}</a></p> #}
+	<audio controls class="player">
+		<source src="{{ object.file.url }}" type="audio/mpeg">
+	</audio>
+	<p>설명:{{ object.description }}</p>
+	<p>내용:</p>
+	{{ object.content|linebreaks }}
+
+<p class="other_posts">
+	{% if object.get_previous_by_modify_date %}
+	<a href="{{ object.get_previous_by_modify_date.get_absolute_url }}" title="View previous posts">&laquo;--{{ object.get_previous_post }}</a>
+	{% endif %}
+
+	{% if object.get_next_by_modify_date %}
+	<a href="{{ object.get_next_by_modify_date.get_absolute_url }}" title="View next posts">{{ object.get_next_post }}--&raquo;</a>
+	{% endif %}
+</p>
+
+{% include "comments/comment_list.html" %}
+</div>
+
+{% endblock %}

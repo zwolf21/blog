@@ -1,0 +1,62 @@
+
+<hr>
+<div class="col-sm-4">
+<p class="lead">뭐라고 하기</p>
+<form method="POST", action="{% url 'comments:add' content_type_id content_id %}" >
+	{% csrf_token %}
+	{% with comment_form as form %}
+	<div class="control-group">
+    	<div class="controls">
+	    	<label class="control-label" for="{{ form.content.id_for_label }}">댓글</label>
+    		<textarea id="{{ form.content.id_for_label }}" placeholder="write comments" name="content" rows=2 required></textarea>
+    		<button type="submit" class="btn btn-large btn-inverse">달기</button>
+   	 	</div>
+    </div>
+	{% endwith %}
+</form>
+{% for comment in comment_list %}
+<blockquote class="blockquote">
+<p>{{ comment.user }}: {{ comment.content }}</p>
+
+<footer>
+		on {{ comment.timestamp|date:"Y-m-d" }}
+		<a class="comment-reply-btn" href="#">{{ comment.children.count }} Comment{{ comment.children.count|pluralize }}<i class="icon-arrow-down"></i></a>
+		{% if comment.user == request.user %}
+			<form method="post" action="{% url 'comments:delete' comment.id %}"> 
+				{% csrf_token %} 
+				<button class="btn btn-small btn-danger" type="submit" value="Delete">지우기</button>
+			</form>
+		{% endif %}
+</footer>
+<div class="comment-reply" style="display: none;">
+	{% for child_comment in comment.children %}
+		<blockquote>
+		<p><small>{{ child_comment.user }}:{{ child_comment.content }}</small></p>
+		<footer>
+			{{ child_comment.timestamp|date:"Y-m-d" }} |</footer>
+			{% if child_comment.user == request.user %}
+				<form method="post" action="{% url 'comments:delete' child_comment.id %}"> 
+				{% csrf_token %} <button class="btn btn-small btn-danger" type="submit" value="Delete">지우기</button></form>
+			{% endif %}
+		</blockquote>
+	{% endfor %}
+	<form method="POST" action="{% url 'comments:add' content_type_id content_id %}">
+		{% csrf_token %}
+	{% with comment_form as form %}
+		<div class="control-group">
+	    	<label class="control-label" for="{{ form.content.id_for_label }}">토</label>
+	    	<div class="controls">
+	    		<textarea id="{{ form.content.id_for_label }}" placeholder="write comments" name="content" rows=2 required></textarea>
+				<input type="hidden" name="parent_id" value="{{ comment.id }}">
+	    		<button class="btn btn-small btn-inverse" type="submit" class="btn">달기</button>
+	   	 	</div>
+	    </div>
+	{% endwith %}
+	</form>
+</div>
+</blockquote>
+<hr>
+{% endfor %}
+
+<div>
+</div>

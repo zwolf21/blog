@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}search.html{% endblock title %}
+
+{% block content %}
+<div id="content">
+
+<h1>Search Results</h1>
+
+
+{% if bookmark_list %}
+<h2>Found {{ bookmark_list.count }} result{{ bookmark_list|pluralize }} in Bookmarks</h2>
+	<ul>
+	{% for bookmark in bookmark_list %}
+		<li><a href="{% url 'bookmark:detail' bookmark.id %}">{{ bookmark }}</a></li>
+	{% endfor %}
+	</ul>
+	<hr>
+{% endif %}
+<br><br>
+
+
+{% if post_list %}
+<h2>검색결과 블로그 에서 {{ post_list.count }}개</h2>
+
+<table class="change-list">
+<tr>
+	<th>제목</th>
+	<th>설명</th>
+	<th>작성자</th>
+</tr>
+
+{% for item in post_list %}
+<tr>
+	<td><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></td>
+	<td>{{ item.description }}</td>
+	<td>{{ item.owner }}</td>
+</tr>
+{% endfor %}
+</table>
+<hr>
+{% endif %}
+<br><br>
+
+
+{% if album_list %}
+<h2>Found {{ album_list.count }} result{{ album_list|pluralize }} in Albums</h2>
+<table class="change-list">
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Owner</th>
+	</tr>
+
+	{% for item in album_list %}
+	<tr>
+		<td><a href="{% url 'photo:album_detail' item.id %}">{{ item.name }}</a></td>
+		<td>{{ item.description }}</td>
+		<td>{{ item.owner }}</td>
+	</tr>
+	{% endfor %}
+	
+</table>	
+<hr>
+{% endif %}
+
+<br>
+{% if photo_list %}
+<h2>Found {{ photo_list.count }} result{{ photo_list|pluralize }} in Photos</h2>
+<table class="change-list">
+	<tr>
+		<th>Album</th>
+		<th>Title</th>
+		<th>Thumbnail</th>
+		<th>Owner</th>
+	</tr>
+
+	{% for item in photo_list %}
+	<tr>
+		<td><a href="{% url 'photo:album_detail' item.album.id %}">{{ item.album }}</a></td>
+		<td>{{ item.title }}</td>
+		<td><a href="{{ item.get_absolute_url }}"><img class="thumbnail" src="{{ item.image.thumb_url }}"></a></td>
+		<td>{{ item.description|linebreaks }}</td>
+		<td>{{ item.owner }}</td>
+	</tr>
+	{% endfor %}
+	
+</table>
+<hr>
+{% endif %}
+
+
+</div>
+{% endblock content %}

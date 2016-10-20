@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}post_confirm_delete.html{% endblock title %}
+
+{% block content %}
+<div id="content">
+
+<form action="" method="post">
+{% csrf_token %}
+	<p>이거 "{{ object.content|truncatechars:12 }}" 지운다?</p>
+	<input type="submit" value="응">
+</form>
+
+</div>
+{% endblock content %}			

@@ -39,32 +39,19 @@
         <ul class="nav navbar-nav">
             <li><a href="{% url 'bookmark:index' %}">즐겨찾자</a></li>
         	<li><a href="{% url 'blog:index' %}">블로그질</a></li> 
-            <!---
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                    <li class="divider"></li>                    
-                </ul>
-            </li>
-            -->
         </ul>
         <ul class="nav navbar-nav navbar-right">
-					{% if user.is_active %}
-			      	<li> 
-			      	<div class="navbar-text" style="color:white">
-			      		어서왓 <strong>{% firstof user.get_short_name user.get_username %}</strong> 
-			      	</div>
-			      	</li>
-					<li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
-					{% else %}
-					<li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
-					<li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> 가입</a></li>
-					{% endif %}
+			{% if user.is_active %}
+	      	<li> 
+	      	<div class="navbar-text" style="color:white">
+	      		어서왓 <strong>{% firstof user.get_short_name user.get_username %}</strong> 
+	      	</div>
+	      	</li>
+			<li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
+			{% else %}
+			<li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+			<li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> 가입</a></li>
+			{% endif %}
 		</ul>
         <div class="col-sm-3 col-md-3 pull-right">
             <form action="{% url 'search' %}" class="navbar-form" role="search" method="post">
@@ -98,8 +85,8 @@ $(function(){
 		event.preventDefault();
 		// $(this).parent().next(".comment-reply").fadeToggle();
 		$(this).parent().next(".comment-reply").slideToggle(500);
-		$(this).children("i").toggleClass('icon-arrow-up');
-		$(this).children("i").toggleClass('icon-arrow-down');
+		$(this).children("i").toggleClass('glyphicon glyphicon-arrow-up');
+		$(this).children("i").toggleClass('glyphicon glyphicon-arrow-down');
 	})
 		 
 

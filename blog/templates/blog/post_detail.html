@@ -13,9 +13,15 @@
 <br>
 <div class="body">
 	{# <p><i class="icon-file"></i><a href="{{ object.file.url }}">{{ object.get_file_name }}</a></p> #}
+	{% if object.file %}
 	<audio controls class="player">
 		<source src="{{ object.file.url }}" type="audio/mpeg">
 	</audio>
+	{% endif %}
+	{% if object.image %}
+		<img src="{{ object.image.url }}">
+	{% endif %}
+
 	<p>설명:{{ object.description }}</p>
 	<p>내용:</p>
 	{{ object.content|linebreaks }}

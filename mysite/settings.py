@@ -46,11 +46,11 @@ INSTALLED_APPS = [
 ]
 
 
-# hitcount 세팅
+# hitcount settings
 HITCOUNT_KEEP_HIT_ACTIVE = { 'seconds': 1 } # days, hours, weeks,
 HITCOUNT_KEEP_HIT_IN_DATABASE = { 'days': 30 }
 
-# crispy_forms 세팅
+# crispy_forms settings
 # CRISPY_TEMPLATE_PACK = 'uni_form'
 
 MIDDLEWARE = [

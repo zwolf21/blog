@@ -5,21 +5,18 @@
 
 {% block content %}
 <div id="content">
-<h1>Post Create/Update - {{ user }}</h1>
+<h1>Post 생성/수정 - {{ user }}</h1>
 
 <form action="." method="post" enctype="multipart/form-data">
 {% csrf_token %}
 {% if form.errors %}
 <p class="errornote">Wrong! Please correct the error(s) below.</p>
 {% endif %}
-
-<p>This is a creation or update form your post</p>
-
-	{{ form|crispy }}
-	<div class="submit">
-		<input class="btn btn-inverse" type="submit" value="작성">
-	</div>
-	<script type="text/javascript">document.getElementById('id_title').focus();</script>
+{{ form|crispy }}
+<div class="submit">
+	<input class="btn btn-inverse" type="submit" value="작성">
+</div>
+<script type="text/javascript">document.getElementById('id_title').focus();</script>
 </form>
 
 </div>
